@@ -58,7 +58,7 @@ public class PickActivity extends AppCompatActivity {
                 }
             });
             thread.start();
-            thread.join();//强制转多线程为单线程，必须让主线程等网络子线程执行完才能获取到非空的picks[0]！！！
+            thread.join();//强行转多线程为单线程，必须让主线程等网络子线程执行完才能获取到非空的picks[0]！！！
         } catch (Exception e) {
             e.printStackTrace();
         }
