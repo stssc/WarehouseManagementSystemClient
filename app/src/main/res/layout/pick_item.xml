@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <!--这里为什么嵌套了三个LinearLayout呢？是因为最外面那个设置不了margin，然后阴影一加就是只要四周有margin就都会加上，但我只要底部跟右侧的，但又需要上下左右都有margin，所以只能外面再嵌套一个margin左侧和顶部的，里面才是加了阴影的margin底部和右侧的-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/layout_background"
+            android:elevation="10dp">
+            <!--底部+右侧阴影-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/pick_order_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/pick_clothes_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="8"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/pick_clothes_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/pick_clothes_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <ToggleButton
+                android:id="@+id/button_pick"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/layout_background"
+                android:background="@color/pick_button"
+                android:textSize="25dp"
+                android:textOff="拣货"
+                android:textOn="拣货"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
