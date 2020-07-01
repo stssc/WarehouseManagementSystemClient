@@ -1,4 +1,4 @@
-package jnu.ssc.client.model;
+package jnu.ssc.client.controller;
 
 import android.os.Build;
 import android.util.Log;
@@ -10,11 +10,16 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import jnu.ssc.client.R;
+import jnu.ssc.client.model.Clothes;
+import jnu.ssc.client.model.Pick;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -64,10 +69,28 @@ public class NetworkProxy {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static Clothes[] assignInventoryTask() throws IOException {
         Request request=new Request.Builder()
-                .url("http://192.168.31.186:8080/staff/inventory_get")
+                .url("http://192.168.31.186:8080/staff/inventory_task")
                 .build();
         Response response=okHttpClient.newCall(request).execute();
         return gson.fromJson(Objects.requireNonNull(response.body()).string(),Clothes[].class);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static void inventoryResultUpdate(String id, int amount) throws IOException {
+//        Map<String,String> shelfMap=new HashMap<>();
+//        shelfMap.put("shelf",shelf);
+//        Map<String,Integer> positionMap=new HashMap<>();
+//        positionMap.put("position",position);
+//        Object[] requestParam=new Object[2];
+//        requestParam[0]=shelfMap;
+//        requestParam[1]=positionMap;
+//        String requestParamJson=gson.toJson(requestParam);
+//        RequestBody requestBody=RequestBody.create(requestParamJson,MediaType.get("application/json; charset=utf-8"));
+        Request request=new Request.Builder()
+                .url("http://192.168.31.186:8080/staff/inventory_errata?id="+id+"&amount="+amount)
+//                .post(requestBody)
+                .build();
+        okHttpClient.newCall(request).execute();
     }
 
 }

@@ -25,7 +25,7 @@ import android.widget.ToggleButton;
 import java.io.IOException;
 
 import jnu.ssc.client.R;
-import jnu.ssc.client.model.NetworkProxy;
+import jnu.ssc.client.controller.NetworkProxy;
 import jnu.ssc.client.model.Pick;
 
 public class PickActivity extends AppCompatActivity {
@@ -43,7 +43,7 @@ public class PickActivity extends AppCompatActivity {
         }
 
         //获取待拣货列表
-        final Pick[][] picks = new Pick[1][1];
+        final Pick[][] picks = new Pick[1][];
         try {
             Thread thread=new Thread(new Runnable() {
                 @TargetApi(Build.VERSION_CODES.KITKAT)

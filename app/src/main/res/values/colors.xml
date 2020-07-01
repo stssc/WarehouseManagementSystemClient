@@ -6,4 +6,6 @@
     <color name="layout_background">#FAFAFA</color>
     <color name="pick_button">#4CAF50</color>
     <color name="picked_button">#AFAFAF</color>
+    <color name="profit">#4CAF50</color>
+    <color name="loss">#F44336</color>
 </resources>

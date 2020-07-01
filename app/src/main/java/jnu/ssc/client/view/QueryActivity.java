@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import jnu.ssc.client.R;
 import jnu.ssc.client.model.Clothes;
-import jnu.ssc.client.model.NetworkProxy;
+import jnu.ssc.client.controller.NetworkProxy;
 
 public class QueryActivity extends AppCompatActivity {
 
