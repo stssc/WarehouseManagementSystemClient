@@ -17,9 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import jnu.ssc.client.R;
+import jnu.ssc.client.controller.FunctionFactory;
 
 public class MainActivity extends AppCompatActivity {
-    private String[] names = FunctionFactory.getFunctionList(FunctionFactory.STAFF);//获取工作人员功能列表
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         if (actionbar!=null){
             actionbar.hide();
         }
+
+        //根据用户角色获取功能列表
+        Intent intent=getIntent();
+        int role=intent.getIntExtra("role",FunctionFactory.STAFF);
+        final String[] names=FunctionFactory.getFunctionList(role);
 
         //显示工作人员功能列表
         ListAdapter adapter = new ListAdapter(

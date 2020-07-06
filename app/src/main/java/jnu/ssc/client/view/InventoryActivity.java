@@ -30,6 +30,7 @@ import java.util.Set;
 import jnu.ssc.client.R;
 import jnu.ssc.client.model.Clothes;
 import jnu.ssc.client.controller.NetworkProxy;
+import jnu.ssc.client.model.InventoryTaskDetail;
 
 public class InventoryActivity extends AppCompatActivity implements Serializable{//因为内部类需要序列化传递给另一个Activity，搞得这个Activity也得跟着序列化
 
@@ -60,8 +61,8 @@ public class InventoryActivity extends AppCompatActivity implements Serializable
                 @Override
                 public void run() {
                     try {
-                        inventories[0] = NetworkProxy.assignInventoryTask();
-                    } catch (IOException e) {
+                        inventories[0] = NetworkProxyAdapter.queryInventoryTask(LoginActivity.getUserId());
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -159,6 +160,17 @@ public class InventoryActivity extends AppCompatActivity implements Serializable
             public void onClick(View v) {
                 final int resultAmount=Integer.parseInt(amountEdit.getText().toString());
                 int inventoryAmount=inventoryMap.get(new ShelfAndPosition(shelfSelected[0],positionSelected[0]).toString()).amount;
+                //盘点完成（新增，以便管理人员查看进度）
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            NetworkProxy.inventoryOver(LoginActivity.getUserId(),shelfSelected[0],positionSelected[0]);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
                 if (resultAmount!=inventoryAmount){
                     //盘点结果勘误（客户端和服务端各一份）
                     //服务端直接单项更新
@@ -166,6 +178,7 @@ public class InventoryActivity extends AppCompatActivity implements Serializable
                         @Override
                         public void run() {
                             try {
+                                //盘点勘误
                                 NetworkProxy.inventoryResultUpdate(clothesIdText.getText().toString(),resultAmount);
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -231,4 +244,31 @@ public class InventoryActivity extends AppCompatActivity implements Serializable
         }
     }
 
+}
+
+class NetworkProxyAdapter{//用于适配queryInventoryTask的返回类型InventoryTaskDetail[]和当前Activity需要的返回类型Clothes[]
+    public static Clothes[] queryInventoryTask(final String staffId) throws InterruptedException {
+        final InventoryTaskDetail[][] inventoryTaskDetails=new InventoryTaskDetail[1][];
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    inventoryTaskDetails[0]=NetworkProxy.queryInventoryTask(staffId);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        thread.join();
+        Clothes[] inventories=new Clothes[inventoryTaskDetails[0].length];
+        for (int i=0;i<inventories.length;i++){
+            inventories[i]=new Clothes();
+            inventories[i].setId(inventoryTaskDetails[0][i].getClothesId());
+            inventories[i].setShelf(inventoryTaskDetails[0][i].getShelf());
+            inventories[i].setPosition(inventoryTaskDetails[0][i].getPosition());
+            inventories[i].setAmount(inventoryTaskDetails[0][i].getAmount());
+        }
+        return inventories;
+    }
 }

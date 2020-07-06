@@ -9,6 +9,10 @@ public class OrderInfo {
 
     private Integer state;
 
+    private Integer back;
+
+    private Integer backAmount;
+
     public String getOrderId() {
         return orderId;
     }
@@ -39,5 +43,21 @@ public class OrderInfo {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getBack() {
+        return back;
+    }
+
+    public void setBack(Integer back) {
+        this.back = back;
+    }
+
+    public Integer getBackAmount() {
+        return backAmount;
+    }
+
+    public void setBackAmount(Integer backAmount) {
+        this.backAmount = backAmount;
     }
 }

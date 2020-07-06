@@ -8,11 +8,11 @@
     tools:context=".view.MainActivity">
 
     <EditText
-        android:id="@+id/text_amount"
+        android:id="@+id/edit_clothes_id"
         android:layout_width="280dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:hint="请输入服装ID"
@@ -21,32 +21,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_store"
+    <EditText
+        android:id="@+id/edit_order_id"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:text="查询"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_clothes_id"
+        android:gravity="center"
+        android:hint="请输入订单ID"/>
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="退货"
         android:textColor="@color/layout_background"
         android:textSize="20dp"
-        android:background="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_amount" />
-
-    <TextView
-        android:id="@+id/text_query"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_store"
-        android:gravity="center_horizontal"
-        android:textSize="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/edit_order_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.InventoryReportActivity"></activity>
+        <activity android:name=".view.InventoryAssignActivity"></activity>
+        <activity android:name=".view.InventoryRateActivity" />
+        <activity android:name=".view.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.NewInventoryActivity" />
+        <activity android:name=".view.BackActivity" />
+        <activity android:name=".view.StoreActivity" />
+        <activity android:name=".view.InventoryReportActivity" />
         <activity android:name=".view.InventoryActivity" />
         <activity android:name=".view.PickActivity" />
         <activity android:name=".view.QueryActivity" />
